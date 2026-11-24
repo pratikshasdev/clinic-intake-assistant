@@ -1,0 +1,194 @@
+[
+  {
+    "id": "plain-01",
+    "tests": "Straightforward generic names with doses",
+    "answers": {
+      "reason": "Annual check-up.",
+      "medications": "Lisinopril 20 mg once a day. Metformin 1000 mg twice a day.",
+      "allergies": "Penicillin causes a rash.",
+      "history": "Hypertension and type 2 diabetes."
+    },
+    "gold": {
+      "conditions": ["hypertension", "type_2_diabetes"],
+      "allergies": ["penicillin"],
+      "medications": [["lisinopril", "active"], ["metformin", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "brand-names-02",
+    "tests": "Brand names that should map to ingredients",
+    "answers": {
+      "reason": "Refill visit.",
+      "medications": "Lipitor 40 at bedtime, Synthroid in the morning, Zyrtec for allergies in spring.",
+      "allergies": "NKDA",
+      "history": "Cholesterol is high and my thyroid is underactive."
+    },
+    "gold": {
+      "conditions": ["hyperlipidemia", "hypothyroidism"],
+      "allergies": [],
+      "medications": [["atorvastatin", "active"], ["levothyroxine", "active"], ["cetirizine", "active"]],
+      "no_known_allergies": true
+    }
+  },
+  {
+    "id": "lay-terms-03",
+    "tests": "Lay descriptions instead of condition names",
+    "answers": {
+      "reason": "My chest burns after meals.",
+      "medications": "Prilosec every morning before breakfast.",
+      "allergies": "none",
+      "history": "My blood pressure runs high and the doctor said I have sugar diabetes."
+    },
+    "gold": {
+      "conditions": ["hypertension", "type_2_diabetes"],
+      "allergies": [],
+      "medications": [["omeprazole", "active"]],
+      "no_known_allergies": true
+    }
+  },
+  {
+    "id": "family-history-04",
+    "tests": "Family history must not become the patient's conditions",
+    "answers": {
+      "reason": "Worried about my heart because of family history.",
+      "medications": "Baby aspirin daily.",
+      "allergies": "Latex.",
+      "history": "I'm healthy. My father had atrial fibrillation and my mom has diabetes."
+    },
+    "gold": {
+      "conditions": [],
+      "allergies": ["latex"],
+      "medications": [["aspirin", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "stopped-meds-05",
+    "tests": "Stopped medications keep their stopped status",
+    "answers": {
+      "reason": "Muscle pain in my legs.",
+      "medications": "I was on Zocor but quit it two weeks ago because of the aches. Now just losartan 50 mg.",
+      "allergies": "No allergies that I know of.",
+      "history": "High blood pressure, high cholesterol."
+    },
+    "gold": {
+      "conditions": ["hypertension", "hyperlipidemia"],
+      "allergies": [],
+      "medications": [["simvastatin", "stopped"], ["losartan", "active"]],
+      "no_known_allergies": true
+    }
+  },
+  {
+    "id": "intolerance-not-allergy-06",
+    "tests": "A side effect the patient says is not an allergy",
+    "answers": {
+      "reason": "Headaches most afternoons.",
+      "medications": "Tylenol as needed.",
+      "allergies": "Ibuprofen gives me heartburn but I'm not allergic to it. Amoxicillin made me break out in hives as a kid.",
+      "history": "Migraines."
+    },
+    "gold": {
+      "conditions": ["migraine"],
+      "allergies": ["amoxicillin"],
+      "medications": [["acetaminophen", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "misspellings-07",
+    "tests": "Common misspellings",
+    "answers": {
+      "reason": "Short of breath climbing stairs.",
+      "medications": "albuteral inhaler when I need it, singular at night",
+      "allergies": "peanuts - anaphylaxis",
+      "history": "asthema since childhood, still have it"
+    },
+    "gold": {
+      "conditions": ["asthma"],
+      "allergies": ["peanut"],
+      "medications": [["albuterol", "active"], ["montelukast", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "symptom-not-diagnosis-08",
+    "tests": "Today's symptoms are not recorded as diagnoses",
+    "answers": {
+      "reason": "I think I might have high blood pressure, I've been getting headaches and my home cuff reads high.",
+      "medications": "None.",
+      "allergies": "Eggs make my lips swell.",
+      "history": "Nothing really."
+    },
+    "gold": {
+      "conditions": [],
+      "allergies": ["egg"],
+      "medications": [],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "uncoded-09",
+    "tests": "Items outside the allowlist stay uncoded rather than forced into a wrong code",
+    "answers": {
+      "reason": "Rash on my arms.",
+      "medications": "Prednisone 10 mg daily for a week, metoprolol 25 twice a day.",
+      "allergies": "Sulfa drugs.",
+      "history": "Psoriasis and afib."
+    },
+    "gold": {
+      "conditions": ["other:psoriasis", "atrial_fibrillation"],
+      "allergies": ["other:sulfa"],
+      "medications": [["other:prednisone", "active"], ["metoprolol", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "resolved-and-current-10",
+    "tests": "Past conditions are resolved, current ones active, and both are captured",
+    "answers": {
+      "reason": "New patient, establishing care.",
+      "medications": "Norvasc 5mg, HCTZ 25mg, both once daily.",
+      "allergies": "Shellfish (throat closes up) and dairy (stomach cramps).",
+      "history": "Hypertension. I had GERD years ago but it's gone. Osteoarthritis in my hands."
+    },
+    "gold": {
+      "conditions": ["hypertension", "gerd", "osteoarthritis"],
+      "allergies": ["shellfish", "cow_milk"],
+      "medications": [["amlodipine", "active"], ["hydrochlorothiazide", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "blood-thinner-11",
+    "tests": "Abbreviations and mixed sentences",
+    "answers": {
+      "reason": "INR check.",
+      "medications": "coumadin 5 mg every night, metoprolol",
+      "allergies": "Aspirin - stomach bleeding last time",
+      "history": "AFib, COPD from smoking for 30 years"
+    },
+    "gold": {
+      "conditions": ["atrial_fibrillation", "copd"],
+      "allergies": ["aspirin"],
+      "medications": [["warfarin", "active"], ["metoprolol", "active"]],
+      "no_known_allergies": false
+    }
+  },
+  {
+    "id": "blank-12",
+    "tests": "Blank answers produce nothing",
+    "answers": {
+      "reason": "Sore throat.",
+      "medications": "",
+      "allergies": "",
+      "history": ""
+    },
+    "gold": {
+      "conditions": [],
+      "allergies": [],
+      "medications": [],
+      "no_known_allergies": false
+    }
+  }
+]

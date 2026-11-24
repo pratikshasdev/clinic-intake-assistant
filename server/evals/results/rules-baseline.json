@@ -1,0 +1,40 @@
+{
+  "extractor": "rules-baseline",
+  "cases": 12,
+  "categories": {
+    "conditions": {
+      "precision": 0.929,
+      "recall": 0.765,
+      "f1": 0.839,
+      "errors": [
+        "brand-names-02: missed hypothyroidism",
+        "lay-terms-03: missed hypertension",
+        "misspellings-07: missed asthma",
+        "symptom-not-diagnosis-08: extra hypertension",
+        "uncoded-09: missed other:psoriasis"
+      ]
+    },
+    "allergies": {
+      "precision": 0.889,
+      "recall": 0.889,
+      "f1": 0.889,
+      "errors": [
+        "intolerance-not-allergy-06: extra ibuprofen",
+        "uncoded-09: missed other:sulfa"
+      ]
+    },
+    "medications": {
+      "precision": 1.0,
+      "recall": 0.833,
+      "f1": 0.909,
+      "errors": [
+        "misspellings-07: missed albuterol|active",
+        "misspellings-07: missed montelukast|active",
+        "uncoded-09: missed other:prednisone|active"
+      ]
+    }
+  },
+  "no_known_allergies_accuracy": 1.0,
+  "source_quotes_found": "38/38",
+  "median_latency_s": 0.0
+}
