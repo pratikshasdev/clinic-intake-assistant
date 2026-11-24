@@ -71,6 +71,10 @@ QUESTIONNAIRE: dict[str, Any] = {
                     "linkId": "pain-score",
                     "text": "If you're in pain, how bad is it from 0 (none) to 10 (worst)?",
                     "type": "integer",
+                    "extension": [
+                        {"url": "http://hl7.org/fhir/StructureDefinition/minValue", "valueInteger": 0},
+                        {"url": "http://hl7.org/fhir/StructureDefinition/maxValue", "valueInteger": 10},
+                    ],
                 },
             ],
         },
