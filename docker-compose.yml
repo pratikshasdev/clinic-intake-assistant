@@ -1,0 +1,32 @@
+# One command for the whole demo: FHIR server, API and front desk dashboard.
+#   docker compose up --build
+# Dashboard: http://localhost:5173   API: http://localhost:8000   FHIR: http://localhost:8080/fhir
+#
+# Synthetic data only. To use Claude instead of the offline rules extractor,
+# export ANTHROPIC_API_KEY in your shell (or put it in a .env file next to this
+# one, which git ignores) before running compose.
+
+services:
+  hapi:
+    # HAPI FHIR JPA server, pinned to the build this project was tested against.
+    image: hapiproject/hapi:latest@sha256:0ff86aac4c7bd13a1ee226444a70263bb46ed1c28ef543c30a44f865b80ca04e
+    ports:
+      - "8080:8080"
+
+  api:
+    build: ./server
+    environment:
+      FHIR_BASE_URL: http://hapi:8080/fhir
+      EXTRACTOR: auto
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - hapi
+
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
